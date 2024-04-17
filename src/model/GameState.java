@@ -1,9 +1,8 @@
 package model;
 
 public enum GameState {
-    Creating,
+    Waiting,
     Playing,
-    Checking,
     PlayerWon,
-    PlayerLose
+    PlayerLost,
 }
