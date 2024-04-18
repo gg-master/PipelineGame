@@ -24,7 +24,9 @@ public class SegmentFactory {
             return new Tee();
         } else if (type == PipeType.Cross) {
             return new Cross();
+        } else if (type == PipeType.Adapter) {
+            return new Adapter();
         }
-        return new Adapter();
+        throw new RuntimeException("Unknown PipeType");
     }
 }
