@@ -74,7 +74,6 @@ public class RandomizedFieldFiller implements IFieldFiller {
             prevSegmentType = nextSegment.get(chosenDir);
             prevCell = prevCell.getNeighbor(chosenDir);
             prevInputDir = chosenDir;
-
             prevCell.setSegment(this.factory.createPipe(prevSegmentType));
         }
         prevCell.setSegment(this.hatch);
@@ -112,6 +111,9 @@ public class RandomizedFieldFiller implements IFieldFiller {
                 nextDir = variants.contains(Direction.south()) ? Direction.south() :
                         variants.contains(Direction.north()) ? Direction.north() :
                                 null;
+            }
+            if (nextDir == null) {
+                return null;
             }
             result.put(nextDir, nextSegmentType);
         }
