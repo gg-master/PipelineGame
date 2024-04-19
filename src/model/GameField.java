@@ -17,12 +17,12 @@ public class GameField {
         }
 
         this.dimension = dimension;
-        this.cells = new ArrayList<>(dimension.width * dimension.height);
-
         this.recreateGameField();
     }
 
     public void recreateGameField() {
+        this.cells = new ArrayList<>(this.dimension.width * this.dimension.height);
+
         for (int row = 0; row < this.dimension.height; row++) {
             for (int col = 0; col < this.dimension.width; col++) {
                 Cell cell = new Cell();
