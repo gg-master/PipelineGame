@@ -1,3 +1,4 @@
+import model.pipeline.segments.Tap;
 import model.utils.Direction;
 import org.junit.jupiter.api.Test;
 
@@ -86,5 +87,8 @@ class DirectionTest {
 
         assertNotEquals(direction_east, direction_west);
         assertNotEquals(direction_east.hashCode(), direction_west.hashCode());
+
+        assertNotEquals(null, direction_north);
+        assertNotEquals(new Tap(), direction_north);
     }
 }
