@@ -34,11 +34,11 @@ public class GameField {
     }
 
     public Cell getCell(int row, int col) {
-        int index = this.dimension.width * row + col;
-        if (index < 0 || index >= this.cells.size()) {
+        if ((row < 0 || row >= this.dimension.height) ||
+                (col < 0 || col >= this.dimension.width)) {
             return null;
         }
-        return this.cells.get(index);
+        return this.cells.get(this.dimension.width * row + col);
     }
 
     public Cell getCell(Point point) {
