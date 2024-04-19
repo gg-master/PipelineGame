@@ -9,7 +9,7 @@ import java.util.*;
 
 public class Pipeline {
     private HashMap<Integer, HashSet<WaterFlowContext>> pipelineBuildHistory;
-    private HashMap<WaterFlowContext, Direction> pourWaterContexts;
+    private HashMap<WaterFlowContext, HashSet<Direction>> pourWaterContexts;
     private final Tap tap;
     private Hatch hatch;
     private int ticCounter = 0;
@@ -82,7 +82,7 @@ public class Pipeline {
         return false;
     }
 
-    public HashMap<WaterFlowContext, Direction> getPourWaterContexts() {
+    public HashMap<WaterFlowContext, HashSet<Direction>> getPourWaterContexts() {
         return new HashMap<>(this.pourWaterContexts);
     }
 
@@ -102,7 +102,11 @@ public class Pipeline {
     }
 
     protected void firePourWater(WaterFlowContext context, Direction direction) {
-        this.pourWaterContexts.put(context, direction);
+        if (!this.pourWaterContexts.containsKey(context)) {
+            this.pourWaterContexts.put(context, new HashSet<>());
+        }
+        this.pourWaterContexts.get(context).add(direction);
+
         for (PipelineListener listener : pipelineListeners) {
             listener.onPourWater(context, direction);
         }
