@@ -13,6 +13,9 @@ public class Water {
     }
 
     public Water runWaterOnDirection(Direction direction) {
+        if (usedFlowDirections.contains(direction)) {
+            return null;
+        }
         Water water = new Water();
         water.usedFlowDirections.add(direction.opposite());
         return water;
