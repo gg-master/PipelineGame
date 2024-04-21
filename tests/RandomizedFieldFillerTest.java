@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class RandomizedFieldFillerTest {
 
     @Test
-    void fillField() {
+    void fillField_sampleTest() {
         Dimension d = new Dimension(10, 10);
         GameField field = new GameField(d);
         RandomizedFieldFiller filler = new RandomizedFieldFiller();
@@ -39,7 +39,7 @@ class RandomizedFieldFillerTest {
     }
 
     @Test
-    void getTap() {
+    void getTap_returningSameTapTest() {
         Dimension d = new Dimension(10, 10);
         GameField field = new GameField(d);
         RandomizedFieldFiller filler = new RandomizedFieldFiller();
@@ -60,7 +60,7 @@ class RandomizedFieldFillerTest {
     }
 
     @Test
-    void getHatch() {
+    void getHatch_returningSameHatchTest() {
         Dimension d = new Dimension(10, 10);
         GameField field = new GameField(d);
         RandomizedFieldFiller filler = new RandomizedFieldFiller();

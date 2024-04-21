@@ -185,7 +185,7 @@ class PipelineTest {
     }
 
     @Test
-    void getPourWaterContexts() {
+    void getPourWaterContexts_testResultCopying() {
         GameField field = new GameField(new Dimension(2, 2));
         field.getCell(0,0).setSegment(new Tap());
         field.getCell(1, 1).setSegment(new Hatch());
@@ -206,7 +206,7 @@ class PipelineTest {
     }
 
     @Test
-    void getPipelineBuildHistory() {
+    void getPipelineBuildHistory_testResultCopying() {
         GameField field = new GameField(new Dimension(2, 2));
         field.getCell(0,0).setSegment(new Tap());
         field.getCell(0, 1).setSegment(new Corner());
