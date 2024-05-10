@@ -1,5 +1,5 @@
-import model.pipeline.Water;
-import model.utils.Direction;
+import PipelineGame.model.pipeline.Water;
+import PipelineGame.model.utils.Direction;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;

@@ -1,6 +1,6 @@
-import model.Cell;
-import model.GameField;
-import model.utils.Direction;
+import PipelineGame.model.Cell;
+import PipelineGame.model.GameField;
+import PipelineGame.model.utils.Direction;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;

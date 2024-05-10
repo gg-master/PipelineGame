@@ -1,6 +1,6 @@
-import model.Cell;
-import model.pipeline.segments.Tap;
-import model.utils.Direction;
+import PipelineGame.model.Cell;
+import PipelineGame.model.pipeline.segments.Tap;
+import PipelineGame.model.utils.Direction;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;

@@ -1,9 +1,9 @@
-import model.Cell;
-import model.GameField;
-import model.fillers.RandomizedFieldFiller;
-import model.pipeline.segments.Hatch;
-import model.pipeline.segments.Segment;
-import model.pipeline.segments.Tap;
+import PipelineGame.model.Cell;
+import PipelineGame.model.GameField;
+import PipelineGame.model.fillers.RandomizedFieldFiller;
+import PipelineGame.model.pipeline.segments.Hatch;
+import PipelineGame.model.pipeline.segments.Segment;
+import PipelineGame.model.pipeline.segments.Tap;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;

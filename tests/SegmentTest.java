@@ -1,12 +1,12 @@
-import model.Cell;
-import model.pipeline.Water;
-import model.pipeline.segments.Hatch;
-import model.pipeline.segments.Tap;
-import model.pipeline.segments.pipes.Adapter;
-import model.pipeline.segments.pipes.Corner;
-import model.pipeline.segments.pipes.Cross;
-import model.pipeline.segments.pipes.Tee;
-import model.utils.Direction;
+import PipelineGame.model.Cell;
+import PipelineGame.model.pipeline.Water;
+import PipelineGame.model.pipeline.segments.Hatch;
+import PipelineGame.model.pipeline.segments.Tap;
+import PipelineGame.model.pipeline.segments.pipes.Adapter;
+import PipelineGame.model.pipeline.segments.pipes.Corner;
+import PipelineGame.model.pipeline.segments.pipes.Cross;
+import PipelineGame.model.pipeline.segments.pipes.Tee;
+import PipelineGame.model.utils.Direction;
 import org.junit.jupiter.api.Test;
 
 

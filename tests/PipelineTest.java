@@ -1,13 +1,13 @@
-import model.GameField;
-import model.pipeline.Pipeline;
-import model.pipeline.Water;
-import model.pipeline.WaterFlowContext;
-import model.pipeline.segments.Hatch;
-import model.pipeline.segments.Segment;
-import model.pipeline.segments.Tap;
-import model.pipeline.segments.pipes.Corner;
-import model.pipeline.segments.pipes.Tee;
-import model.utils.Direction;
+import PipelineGame.model.GameField;
+import PipelineGame.model.pipeline.Pipeline;
+import PipelineGame.model.pipeline.Water;
+import PipelineGame.model.pipeline.WaterFlowContext;
+import PipelineGame.model.pipeline.segments.Hatch;
+import PipelineGame.model.pipeline.segments.Segment;
+import PipelineGame.model.pipeline.segments.Tap;
+import PipelineGame.model.pipeline.segments.pipes.Corner;
+import PipelineGame.model.pipeline.segments.pipes.Tee;
+import PipelineGame.model.utils.Direction;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;

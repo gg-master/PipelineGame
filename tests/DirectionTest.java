@@ -1,5 +1,5 @@
-import model.pipeline.segments.Tap;
-import model.utils.Direction;
+import PipelineGame.model.pipeline.segments.Tap;
+import PipelineGame.model.utils.Direction;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
