@@ -10,7 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -19,7 +18,7 @@ public class MainWindow extends JFrame {
     private Game game;
     private JMenuBar menuBar;
     private final JButton readyButton;
-    private FieldView fieldView = new FieldView(new GameField(new Dimension(2, 2)));
+    private FieldView fieldView = new FieldView(new GameField(new Dimension(3, 2)));
 
     private final LinkedHashMap<String, Dimension> menuItemsOfGameModes = new LinkedHashMap<>() {{
         put("Start 2x2 game", new Dimension(2, 2));

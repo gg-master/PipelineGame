@@ -2,6 +2,7 @@ package PipelineGame.ui.segments;
 
 import PipelineGame.AppSettings;
 import PipelineGame.model.pipeline.segments.Segment;
+import PipelineGame.model.pipeline.segments.pipes.Adapter;
 import PipelineGame.model.utils.Direction;
 import PipelineGame.ui.ImageHelper;
 
@@ -17,8 +18,8 @@ public class AdapterView extends SegmentView{
         put(Set.of(Direction.north(), Direction.south()), ImageHelper.rotateIcon(icon));
     }};
 
-    public AdapterView(Segment segment) {
-        super(segment);
+    public AdapterView(Adapter adapter) {
+        super(adapter);
     }
 
     @Override

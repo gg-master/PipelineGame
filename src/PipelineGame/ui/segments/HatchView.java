@@ -1,6 +1,7 @@
 package PipelineGame.ui.segments;
 
 import PipelineGame.AppSettings;
+import PipelineGame.model.pipeline.segments.Hatch;
 import PipelineGame.model.pipeline.segments.Segment;
 import PipelineGame.model.utils.Direction;
 import PipelineGame.ui.ImageHelper;
@@ -18,8 +19,8 @@ public class HatchView extends SegmentView {
         put(Direction.north(), ImageHelper.rotateIcon(ImageHelper.rotateIcon(ImageHelper.rotateIcon(icon))));
     }};
 
-    public HatchView(Segment segment) {
-        super(segment);
+    public HatchView(Hatch hatch) {
+        super(hatch);
     }
 
     @Override

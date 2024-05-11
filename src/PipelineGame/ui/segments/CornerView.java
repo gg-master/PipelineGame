@@ -2,6 +2,7 @@ package PipelineGame.ui.segments;
 
 import PipelineGame.AppSettings;
 import PipelineGame.model.pipeline.segments.Segment;
+import PipelineGame.model.pipeline.segments.pipes.Corner;
 import PipelineGame.model.utils.Direction;
 import PipelineGame.ui.ImageHelper;
 
@@ -19,8 +20,8 @@ public class CornerView extends SegmentView{
         put(Set.of(Direction.south(), Direction.west()), ImageHelper.rotateIcon(ImageHelper.rotateIcon(ImageHelper.rotateIcon(icon))));
     }};
 
-    public CornerView(Segment segment) {
-        super(segment);
+    public CornerView(Corner corner) {
+        super(corner);
     }
 
     @Override

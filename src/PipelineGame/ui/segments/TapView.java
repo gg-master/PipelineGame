@@ -2,6 +2,7 @@ package PipelineGame.ui.segments;
 
 import PipelineGame.AppSettings;
 import PipelineGame.model.pipeline.segments.Segment;
+import PipelineGame.model.pipeline.segments.Tap;
 import PipelineGame.model.utils.Direction;
 import PipelineGame.ui.ImageHelper;
 
@@ -18,8 +19,8 @@ public class TapView extends SegmentView {
         put(Direction.north(), ImageHelper.rotateIcon(ImageHelper.rotateIcon(ImageHelper.rotateIcon(icon))));
     }};
 
-    public TapView(Segment segment) {
-        super(segment);
+    public TapView(Tap tap) {
+        super(tap);
     }
 
     @Override

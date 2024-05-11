@@ -8,6 +8,7 @@ import PipelineGame.model.pipeline.segments.Segment;
 import PipelineGame.model.pipeline.segments.Tap;
 import PipelineGame.model.pipeline.segments.pipes.Adapter;
 import PipelineGame.model.pipeline.segments.pipes.Corner;
+import PipelineGame.model.pipeline.segments.pipes.Cross;
 import PipelineGame.model.pipeline.segments.pipes.Tee;
 import PipelineGame.model.utils.Direction;
 import PipelineGame.ui.segments.*;
@@ -59,17 +60,17 @@ public class FieldView extends JPanel {
                     }
 
                     if (segment instanceof Tap) {
-                        segmentView = new TapView(segment);
+                        segmentView = new TapView((Tap) segment);
                     } else if (segment instanceof Hatch) {
-                        segmentView = new HatchView(segment);
+                        segmentView = new HatchView((Hatch) segment);
                     } else if (segment instanceof Adapter) {
-                        segmentView = new AdapterView(segment);
+                        segmentView = new AdapterView((Adapter) segment);
                     } else if (segment instanceof Corner) {
-                        segmentView = new CornerView(segment);
+                        segmentView = new CornerView((Corner) segment);
                     } else if (segment instanceof Tee) {
-                        segmentView = new TeeView(segment);
+                        segmentView = new TeeView((Tee) segment);
                     } else {
-                        segmentView = new CrossView(segment);
+                        segmentView = new CrossView((Cross) segment);
                     }
 
                     add(segmentView);

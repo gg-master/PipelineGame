@@ -2,6 +2,7 @@ package PipelineGame.ui.segments;
 
 import PipelineGame.AppSettings;
 import PipelineGame.model.pipeline.segments.Segment;
+import PipelineGame.model.pipeline.segments.pipes.Tee;
 import PipelineGame.model.utils.Direction;
 import PipelineGame.ui.ImageHelper;
 
@@ -19,8 +20,8 @@ public class TeeView extends SegmentView{
         put(Set.of(Direction.south(), Direction.north(), Direction.west()), ImageHelper.rotateIcon(ImageHelper.rotateIcon(ImageHelper.rotateIcon(icon))));
     }};
 
-    public TeeView(Segment segment) {
-        super(segment);
+    public TeeView(Tee tee) {
+        super(tee);
     }
 
     @Override
