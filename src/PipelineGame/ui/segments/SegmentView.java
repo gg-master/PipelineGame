@@ -6,6 +6,7 @@ import PipelineGame.ui.ImageHelper;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 import static PipelineGame.ui.ImageHelper.getScaledIcon;
 
@@ -24,16 +25,16 @@ public abstract class SegmentView extends JButton {
         segment.addPipelineSegmentListener(new PipelineSegmentListener());
     }
 
-//    public void setEnabledSegment(boolean isEnabled) {
-//        if (isEnabled) {
-//            addActionListener(e -> rotateRight());
-//        }
-//        else {
-//            for( ActionListener al : this.getActionListeners() ) {
-//                this.removeActionListener( al );
-//            }
-//        }
-//    }
+    public void setEnabledSegment(boolean isEnabled) {
+        if (isEnabled) {
+            addActionListener(e -> rotateRight());
+        }
+        else {
+            for( ActionListener al : this.getActionListeners() ) {
+                this.removeActionListener( al );
+            }
+        }
+    }
 
     public void rotateRight() {
         this.segment.rotateRight();

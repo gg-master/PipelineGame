@@ -15,12 +15,23 @@ import PipelineGame.ui.segments.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
 
 
 public class FieldView extends JPanel {
     public final PipelineListener pipelineListener = new PipelineListener();
     private final Dimension dimension;
     private final GameField gameField;
+
+    private final Map<Class<?>, Function<Object, SegmentView>> segmentViewMap = new HashMap<>(){{
+        put(Tap.class, segment -> new TapView((Tap) segment));
+        put(Hatch.class, segment -> new HatchView((Hatch) segment));
+        put(Adapter.class, segment -> new AdapterView((Adapter) segment));
+        put(Corner.class, segment -> new CornerView((Corner) segment));
+        put(Tee.class, segment -> new TeeView((Tee) segment));
+    }};
 
     public FieldView(GameField gameField) {
         this.gameField = gameField;
@@ -58,20 +69,10 @@ public class FieldView extends JPanel {
                     if (segment == null){
                         continue;
                     }
-
-                    if (segment instanceof Tap) {
-                        segmentView = new TapView((Tap) segment);
-                    } else if (segment instanceof Hatch) {
-                        segmentView = new HatchView((Hatch) segment);
-                    } else if (segment instanceof Adapter) {
-                        segmentView = new AdapterView((Adapter) segment);
-                    } else if (segment instanceof Corner) {
-                        segmentView = new CornerView((Corner) segment);
-                    } else if (segment instanceof Tee) {
-                        segmentView = new TeeView((Tee) segment);
-                    } else {
-                        segmentView = new CrossView((Cross) segment);
-                    }
+                    segmentView = segmentViewMap.getOrDefault(
+                            segment.getClass(),
+                            segmentObj -> new CrossView((Cross) segmentObj)
+                    ).apply(segment);
 
                     add(segmentView);
                 } catch (Exception e) {
@@ -84,7 +85,7 @@ public class FieldView extends JPanel {
 
     public void setEnabledField(boolean isEnabled){
         for(Component c : this.getComponents()) {
-            c.setEnabled(isEnabled);
+            ((SegmentView)c).setEnabledSegment(isEnabled);
         }
     }
 
