@@ -135,9 +135,9 @@ public class MainWindow extends JFrame {
         @Override
         public void onGameStateChanged(GameState state) {
             if (state == GameState.PlayerWon) {
-                showMessageDialog("<html><h2>Win</h2><i>Win</i>");
+                showMessageDialog("<html><h2>Вы победили!</h2><i>Вода успешно дотекла до конца трубопровода!</i>");
             } else if (state == GameState.PlayerLost) {
-                showMessageDialog("<html><h2>Lose</h2><i>Lose</i>");
+                showMessageDialog("<html><h2>Вы проиграли!</h2><i>Вода вылилась за пределы трубопровода :(</i>");
             }
         }
     }
