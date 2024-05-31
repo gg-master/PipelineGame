@@ -1,6 +1,6 @@
 import PipelineGame.model.GameField;
 import PipelineGame.model.pipeline.Pipeline;
-import PipelineGame.model.pipeline.Water;
+import PipelineGame.model.pipeline.water.Water;
 import PipelineGame.model.pipeline.WaterFlowContext;
 import PipelineGame.model.pipeline.segments.Hatch;
 import PipelineGame.model.pipeline.segments.Segment;

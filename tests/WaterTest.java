@@ -1,4 +1,4 @@
-import PipelineGame.model.pipeline.Water;
+import PipelineGame.model.pipeline.water.Water;
 import PipelineGame.model.utils.Direction;
 import org.junit.jupiter.api.Test;
 

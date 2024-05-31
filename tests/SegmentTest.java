@@ -1,5 +1,5 @@
 import PipelineGame.model.Cell;
-import PipelineGame.model.pipeline.Water;
+import PipelineGame.model.pipeline.water.Water;
 import PipelineGame.model.pipeline.segments.Hatch;
 import PipelineGame.model.pipeline.segments.Tap;
 import PipelineGame.model.pipeline.segments.pipes.Adapter;
