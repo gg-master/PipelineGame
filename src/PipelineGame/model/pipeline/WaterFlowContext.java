@@ -1,5 +1,6 @@
 package PipelineGame.model.pipeline;
 
+import PipelineGame.model.pipeline.water.Water;
 import PipelineGame.model.utils.Direction;
 
 import java.util.HashSet;

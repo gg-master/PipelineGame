@@ -3,6 +3,7 @@ package PipelineGame.model.pipeline;
 import PipelineGame.model.events.IPipelineListener;
 import PipelineGame.model.pipeline.segments.Hatch;
 import PipelineGame.model.pipeline.segments.Tap;
+import PipelineGame.model.pipeline.water.Water;
 import PipelineGame.model.utils.Direction;
 
 import java.util.*;

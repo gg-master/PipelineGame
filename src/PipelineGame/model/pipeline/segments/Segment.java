@@ -2,7 +2,8 @@ package PipelineGame.model.pipeline.segments;
 
 import PipelineGame.model.Cell;
 import PipelineGame.model.events.IPipelineSegmentListener;
-import PipelineGame.model.pipeline.Water;
+import PipelineGame.model.pipeline.devices.WaterDevice;
+import PipelineGame.model.pipeline.water.Water;
 import PipelineGame.model.pipeline.WaterFlowContext;
 import PipelineGame.model.utils.Direction;
 
@@ -11,10 +12,19 @@ import java.util.*;
 public abstract class Segment implements WaterFlowContext {
 
     protected HashSet<Direction> drainages;
+    protected List<WaterDevice> devices = new ArrayList<>();
 
     protected Water water;
 
     protected Cell cell;
+
+    public void addDevice(WaterDevice device) {
+        this.devices.add(device);
+    }
+
+    public ArrayList<WaterDevice> getDevices() {
+        return new ArrayList<>(this.devices);
+    }
 
     public void setCell(Cell cell) {
         if (this.cell == cell) {
@@ -51,6 +61,7 @@ public abstract class Segment implements WaterFlowContext {
     public HashSet<Direction> getAvailableDirections() {
         return new HashSet<>(this.drainages);
     }
+
     public WaterFlowContext getNextContext(Direction direction) {
         return this.getNeighborSegment(direction);
     }
@@ -61,8 +72,14 @@ public abstract class Segment implements WaterFlowContext {
         } else {
             this.water = water;
         }
-
+        for (WaterDevice device : this.devices) {
+            this.water = device.conductWater(this.water);
+        }
         this.fireConductWater();
+        return this.water;
+    }
+
+    public Water getWater() {
         return this.water;
     }
 
