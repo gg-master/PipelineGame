@@ -1,7 +1,6 @@
 package PipelineGame.ui.segments;
 
 import PipelineGame.AppSettings;
-import PipelineGame.model.pipeline.segments.Segment;
 import PipelineGame.model.pipeline.segments.pipes.Adapter;
 import PipelineGame.model.utils.Direction;
 import PipelineGame.ui.ImageHelper;

@@ -2,7 +2,6 @@ package PipelineGame.ui.segments;
 
 import PipelineGame.AppSettings;
 import PipelineGame.model.pipeline.segments.Hatch;
-import PipelineGame.model.pipeline.segments.Segment;
 import PipelineGame.model.utils.Direction;
 import PipelineGame.ui.ImageHelper;
 

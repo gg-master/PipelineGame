@@ -5,6 +5,8 @@ import PipelineGame.model.GameField;
 import PipelineGame.model.GameState;
 import PipelineGame.model.events.IGameStateListener;
 import PipelineGame.model.fillers.RandomizedFieldFiller;
+import PipelineGame.model.pipeline.water.properties.Salt;
+import PipelineGame.model.pipeline.water.properties.Temperature;
 
 import javax.swing.*;
 import java.awt.*;
@@ -80,7 +82,7 @@ public class MainWindow extends JFrame {
         aboutItem.addActionListener(e -> {
             String text = "<html><h2>PipelineGame</h2><h4>Игра \"Водопроводчик\"</h4>" +
                     "Курсовой проект по дисциплине Объектно-ориентированный анализ и программирование<br>" +
-                    "Автор: Коршунов Анатолий<br>Дата сборки: 10.05.2024<br></html>";
+                    "Автор: Коршунов Анатолий<br>Дата сборки: 31.05.2024<br></html>";
             JOptionPane.showMessageDialog(MainWindow.this, text,
                     "Об игре", JOptionPane.PLAIN_MESSAGE);
         });
@@ -137,7 +139,13 @@ public class MainWindow extends JFrame {
             if (state == GameState.PlayerWon) {
                 showMessageDialog("<html><h2>Вы победили!</h2><i>Вода успешно дотекла до конца трубопровода!</i>");
             } else if (state == GameState.PlayerLost) {
-                showMessageDialog("<html><h2>Вы проиграли!</h2><i>Вода вылилась за пределы трубопровода :(</i>");
+                Temperature temp = (Temperature) game.getExpWater().getProperty(Temperature.class);
+                Salt salt = (Salt) game.getExpWater().getProperty(Salt.class);
+
+                showMessageDialog("<html><h2>Вы проиграли!</h2><i>Вода вылилась за пределы трубопровода или <br>не " +
+                        "соответствует ожидаемой воде :(</i><br><br>Ожидаемая вода: " +
+                        temp.toString() + " " + salt.toString());
+
             }
         }
     }

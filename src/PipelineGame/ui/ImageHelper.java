@@ -84,8 +84,19 @@ public class ImageHelper {
         transform.translate(-bufferedImage.getHeight() / 2.0, -bufferedImage.getWidth() / 2.0);
         g2d.drawImage(image, transform, null);
 
-        g2d.dispose();
+        g2d.dispose( );
 
         return new ImageIcon(bufferedImage);
+    }
+
+    public static ImageIcon overlayImages(ImageIcon baseIcon, ImageIcon overlayIcon, int x, int y) {
+        BufferedImage baseImage = imageIconToBufferedImage(baseIcon);
+        BufferedImage overlayImage = imageIconToBufferedImage(overlayIcon);
+
+        Graphics2D g = baseImage.createGraphics();
+        g.drawImage(overlayImage, x, y, null);
+        g.dispose();
+
+        return new ImageIcon(baseImage);
     }
 }
