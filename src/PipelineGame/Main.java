@@ -1,5 +1,8 @@
 package PipelineGame;
 
+import PipelineGame.model.pipeline.water.Water;
+import PipelineGame.model.pipeline.water.properties.Salt;
+import PipelineGame.model.pipeline.water.properties.Temperature;
 import PipelineGame.ui.MainWindow;
 
 
