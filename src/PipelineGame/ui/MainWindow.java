@@ -21,8 +21,8 @@ public class MainWindow extends JFrame {
     private JMenuBar menuBar;
     private final JButton readyButton;
 
-    private JLabel gameStartWaterLabel;
-    private JLabel gameObjectiveLabel;
+    private final JLabel gameStartWaterLabel;
+    private final JLabel gameObjectiveLabel;
     private FieldView fieldView = new FieldView(new GameField(new Dimension(3, 2)));
 
     private final LinkedHashMap<String, Dimension> menuItemsOfGameModes = new LinkedHashMap<>() {{
