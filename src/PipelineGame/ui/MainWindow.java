@@ -20,6 +20,9 @@ public class MainWindow extends JFrame {
     private Game game;
     private JMenuBar menuBar;
     private final JButton readyButton;
+
+    private JLabel gameStartWaterLabel;
+    private JLabel gameObjectiveLabel;
     private FieldView fieldView = new FieldView(new GameField(new Dimension(3, 2)));
 
     private final LinkedHashMap<String, Dimension> menuItemsOfGameModes = new LinkedHashMap<>() {{
@@ -42,20 +45,35 @@ public class MainWindow extends JFrame {
         Box mainBox = Box.createVerticalBox();
         mainBox.add(Box.createVerticalStrut(10));
 
+        JPanel centerPanel = new JPanel();
+        centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
+        centerPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         this.readyButton = new JButton("Ready");
         this.readyButton.addActionListener(e -> stopGame());
         this.readyButton.setBackground(Color.WHITE);
         this.readyButton.setEnabled(false);
+        this.readyButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JPanel panel = new JPanel();
-        panel.add(this.readyButton);
-        panel.setBackground(Color.darkGray);
+        this.gameObjectiveLabel = new JLabel();
+        this.gameObjectiveLabel.setForeground(Color.WHITE);
+        this.gameObjectiveLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        this.gameObjectiveLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        mainBox.add(panel, BorderLayout.PAGE_START);
+        this.gameStartWaterLabel = new JLabel();
+        this.gameStartWaterLabel.setForeground(Color.WHITE);
+        this.gameStartWaterLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        this.gameStartWaterLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        centerPanel.add(this.readyButton);
+        centerPanel.add(Box.createVerticalStrut(10));
+        centerPanel.add(this.gameObjectiveLabel);
+        centerPanel.add(this.gameStartWaterLabel);
+        centerPanel.setBackground(Color.darkGray);
+
+        mainBox.add(centerPanel);
         mainBox.add(Box.createVerticalStrut(10));
         this.fieldView.setEnabledField(false);
-
         mainBox.add(fieldView);
         setContentPane(mainBox);
         this.pack();
@@ -104,6 +122,16 @@ public class MainWindow extends JFrame {
         this.game.getPipeline().addPipeLineListener(this.fieldView.pipelineListener);
 
         this.readyButton.setEnabled(true);
+
+        Temperature temp = (Temperature) game.getExpWater().getPropertyContainer().getProperty(Temperature.class);
+        Salt salt = (Salt) game.getExpWater().getPropertyContainer().getProperty(Salt.class);
+        this.gameObjectiveLabel.setText("Ожидаемая вода: Teмпература: > " +
+                String.format("%.2f", temp.getDegrees()) + " Соли: < " + String.format("%.2f", salt.getPSU()));
+
+        Temperature startTemp = (Temperature) game.getStartWater().getPropertyContainer().getProperty(Temperature.class);
+        Salt startSalt = (Salt) game.getStartWater().getPropertyContainer().getProperty(Salt.class);
+        this.gameStartWaterLabel.setText("Стартовая вода: " + startTemp.toString() + " " + startSalt.toString());
+
         this.game.startGame();
         this.pack();
     }
@@ -139,13 +167,12 @@ public class MainWindow extends JFrame {
             if (state == GameState.PlayerWon) {
                 showMessageDialog("<html><h2>Вы победили!</h2><i>Вода успешно дотекла до конца трубопровода!</i>");
             } else if (state == GameState.PlayerLost) {
-                Temperature temp = (Temperature) game.getExpWater().getProperty(Temperature.class);
-                Salt salt = (Salt) game.getExpWater().getProperty(Salt.class);
+                Temperature temp = (Temperature) game.getExpWater().getPropertyContainer().getProperty(Temperature.class);
+                Salt salt = (Salt) game.getExpWater().getPropertyContainer().getProperty(Salt.class);
 
                 showMessageDialog("<html><h2>Вы проиграли!</h2><i>Вода вылилась за пределы трубопровода или <br>не " +
-                        "соответствует ожидаемой воде :(</i><br><br>Ожидаемая вода: " +
-                        temp.toString() + " " + salt.toString());
-
+                        "соответствует ожидаемой воде :(</i><br><br>Ожидаемая вода: Teмпература: > " +
+                        String.format("%.2f", temp.getDegrees()) + " Соли: < " + String.format("%.2f", salt.getPSU()));
             }
         }
     }

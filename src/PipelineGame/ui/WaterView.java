@@ -9,7 +9,7 @@ public class WaterView {
     private Color color = Color.CYAN;
 
     public WaterView(Water water) {
-        Temperature temp = (Temperature) water.getProperty(Temperature.class);
+        Temperature temp = (Temperature) water.getPropertyContainer().getProperty(Temperature.class);
         if (temp.isFrozen()) {
             color = new Color(189, 255, 255);
         } else if (temp.getDegrees() < 0) {

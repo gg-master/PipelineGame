@@ -17,4 +17,9 @@ public abstract class WaterProperty {
         }
         return property;
     }
+
+    @Override
+    public int hashCode() {
+        return this.getClass().hashCode();
+    }
 }

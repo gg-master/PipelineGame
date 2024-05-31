@@ -3,15 +3,22 @@ package PipelineGame.model.pipeline.water;
 import PipelineGame.model.pipeline.water.properties.Temperature;
 import PipelineGame.model.utils.Direction;
 
-import java.util.HashMap;
 import java.util.HashSet;
 
 public class Water {
     private final HashSet<Direction> usedFlowDirections = new HashSet<>();
-    private final HashMap<Class<? extends WaterProperty>, WaterProperty> properties = new HashMap<>();
+    private PropertyContainer propertyContainer = new PropertyContainer();
+
+    public void setPropertyContainer(PropertyContainer propertyContainer) {
+        this.propertyContainer = propertyContainer.clone();
+    }
+
+    public PropertyContainer getPropertyContainer() {
+        return this.propertyContainer.clone();
+    }
 
     public HashSet<Direction> getFlowDirections(HashSet<Direction> directions) {
-        if (((Temperature)this.getProperty(Temperature.class)).isFrozen()) {
+        if (((Temperature)this.propertyContainer.getProperty(Temperature.class)).isFrozen()) {
             return new HashSet<>();
         }
         directions.removeAll(this.usedFlowDirections);
@@ -30,11 +37,11 @@ public class Water {
 
     public Water mix(Water otherWater) {
         Water newWaterWithFlowDirections = this.mixFlowDirections(otherWater);
-        Water newWaterWithProperties = this.mixProperties(otherWater);
+        PropertyContainer newPropertyContainer = this.propertyContainer.mixProperties(otherWater.propertyContainer);
 
         Water newWater = new Water();
         newWater.usedFlowDirections.addAll(newWaterWithFlowDirections.usedFlowDirections);
-        newWater.properties.putAll(newWaterWithProperties.properties);
+        newWater.setPropertyContainer(newPropertyContainer);
         return newWater;
     }
 
@@ -45,58 +52,19 @@ public class Water {
         return newWater;
     }
 
-    private Water mixProperties(Water otherWater) {
-        Water newWater = new Water();
-
-        for (WaterProperty p: this.properties.values()) {
-            WaterProperty otherP = otherWater.properties.get(p.getClass());
-            if (otherP == null) {
-                otherP = WaterProperty.createInstance(p.getClass());
-            }
-            WaterProperty newProperty = p.mix(otherP);
-            newWater.addProperty(newProperty);
-        }
-
-        for (WaterProperty otherP: otherWater.properties.values()) {
-            WaterProperty p = this.properties.get(otherP.getClass());
-            if (p == null) {
-                p = WaterProperty.createInstance(otherP.getClass());
-            }
-            WaterProperty newProperty = p.mix(otherP);
-            newWater.addProperty(newProperty);
-        }
-
-        return newWater;
-    }
-
-    public HashMap<Class<? extends WaterProperty>, WaterProperty> getProperties() {
-        return new HashMap<>(this.properties);
-    }
-
-    public WaterProperty getProperty(Class<? extends WaterProperty> p) {
-        if (this.properties.containsKey(p)) {
-            return this.properties.get(p);
-        }
-        return WaterProperty.createInstance(p);
-    }
-
-    public void addProperty(WaterProperty p) {
-        this.properties.put(p.getClass(), p);
-    }
-
     @Override
     public boolean equals(Object object) {
         if (!(object instanceof Water)) {
             return false;
         }
 
-        return this.properties.equals(((Water) object).properties);
+        return this.propertyContainer.equals(((Water) object).propertyContainer);
     }
 
     public Water clone() {
         Water water = new Water();
         water.usedFlowDirections.addAll(this.usedFlowDirections);
-        water.properties.putAll(this.properties);
+        water.setPropertyContainer(this.propertyContainer);
         return water;
     }
 }

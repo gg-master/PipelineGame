@@ -8,25 +8,37 @@ import java.util.Random;
 public class WaterFactory {
     public Water createFrozenWater() {
         Water newWater = new Water();
-        newWater.addProperty(new Temperature(-100));
+
+        PropertyContainer propertyContainer = newWater.getPropertyContainer();
+        propertyContainer.addProperty(new Temperature(-100));
+        newWater.setPropertyContainer(propertyContainer);
         return newWater;
     }
 
     public Water createBoiledWater() {
         Water newWater = new Water();
-        newWater.addProperty(new Temperature(100));
+
+        PropertyContainer propertyContainer = newWater.getPropertyContainer();
+        propertyContainer.addProperty(new Temperature(100));
+        newWater.setPropertyContainer(propertyContainer);
         return newWater;
     }
 
     public Water createDistilledWater() {
         Water newWater = new Water();
-        newWater.addProperty(new Salt(0));
+
+        PropertyContainer propertyContainer = newWater.getPropertyContainer();
+        propertyContainer.addProperty(new Salt(0));
+        newWater.setPropertyContainer(propertyContainer);
         return newWater;
     }
 
     public Water createSeawater() {
         Water newWater = new Water();
-        newWater.addProperty(new Salt(100));
+
+        PropertyContainer propertyContainer = newWater.getPropertyContainer();
+        propertyContainer.addProperty(new Salt(100));
+        newWater.setPropertyContainer(propertyContainer);
         return newWater;
     }
 
@@ -34,9 +46,11 @@ public class WaterFactory {
         Random random = new Random();
 
         Water newWater = new Water();
-        newWater.addProperty(new Salt(random.nextDouble(1000)));
-        newWater.addProperty(new Temperature(random.nextDouble(200) - 60));
 
+        PropertyContainer propertyContainer = newWater.getPropertyContainer();
+        propertyContainer.addProperty(new Salt(random.nextDouble(1000)));
+        propertyContainer.addProperty(new Temperature(random.nextDouble(200) - 60));
+        newWater.setPropertyContainer(propertyContainer);
         return newWater;
     }
 }

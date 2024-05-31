@@ -14,13 +14,18 @@ public class Game {
     private GameState gameState = GameState.Waiting;
     private final Pipeline pipeline;
     private final IFieldFiller filler;
-    private Water expWater;
+
+    private final Water startWater;
+    private final Water expWater;
 
     public Game(GameField field, IFieldFiller filler) {
         filler.fillField(field);
 
         this.filler = filler;
         this.pipeline = new Pipeline(filler.getTap());
+
+        this.startWater = new WaterFactory().createRandomizedWater();
+        this.expWater = new WaterFactory().createRandomizedWater();
     }
 
     public Pipeline getPipeline() {
@@ -31,13 +36,16 @@ public class Game {
         return this.expWater.clone();
     }
 
+    public Water getStartWater() {
+        return this.startWater.clone();
+    }
+
     public void startGame() {
         changeState(GameState.Playing);
     }
 
     public void stopGame() {
-        this.pipeline.buildPipeline(new WaterFactory().createRandomizedWater());
-        this.expWater = new WaterFactory().createRandomizedWater();
+        this.pipeline.buildPipeline(this.startWater);
 
         boolean isHatchReached = this.pipeline.isHatchReached();
         int pourWaterCount = this.pipeline.getPourWaterContexts().size();
@@ -45,11 +53,11 @@ public class Game {
 
         if (isHatchReached) {
             Water inHatchWater = this.filler.getHatch().getWater();
-            Temperature temp = (Temperature) inHatchWater.getProperty(Temperature.class);
-            Salt salt = (Salt) inHatchWater.getProperty(Salt.class);
+            Temperature temp = (Temperature) inHatchWater.getPropertyContainer().getProperty(Temperature.class);
+            Salt salt = (Salt) inHatchWater.getPropertyContainer().getProperty(Salt.class);
 
-            Temperature extTemp = (Temperature) this.expWater.getProperty(Temperature.class);
-            Salt expSalt = (Salt) this.expWater.getProperty(Salt.class);
+            Temperature extTemp = (Temperature) this.expWater.getPropertyContainer().getProperty(Temperature.class);
+            Salt expSalt = (Salt) this.expWater.getPropertyContainer().getProperty(Salt.class);
 
             isWaterGood = temp.getDegrees() > extTemp.getDegrees() && salt.getPSU() < expSalt.getPSU();
         }

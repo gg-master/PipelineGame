@@ -52,7 +52,7 @@ public abstract class SegmentView extends JButton {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append(this.createTooltipTextForSegment()).append("<html><b>Вода:</b><br>");
-        for (WaterProperty p : this.segment.getWater().getProperties().values()) {
+        for (WaterProperty p : this.segment.getWater().getPropertyContainer()) {
             stringBuilder.append("\t<i>").append(p.toString()).append("</i><br>");
         }
         return stringBuilder.toString();
