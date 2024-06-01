@@ -6,8 +6,8 @@ import PipelineGame.model.utils.Direction;
 import java.util.HashSet;
 
 public class Water {
-    private final HashSet<Direction> usedFlowDirections = new HashSet<>();
-    private PropertyContainer propertyContainer = new PropertyContainer();
+    private final HashSet<Direction> _usedFlowDirections = new HashSet<>();
+    private PropertyContainer _propertyContainer = new PropertyContainer();
 
     public Water() {
     }
@@ -17,45 +17,45 @@ public class Water {
     }
 
     public void setPropertyContainer(PropertyContainer propertyContainer) {
-        this.propertyContainer = propertyContainer.clone();
+        this._propertyContainer = propertyContainer.clone();
     }
 
     public PropertyContainer getPropertyContainer() {
-        return this.propertyContainer.clone();
+        return this._propertyContainer.clone();
     }
 
     public HashSet<Direction> getFlowDirections(HashSet<Direction> directions) {
-        if (((Temperature)this.propertyContainer.getProperty(Temperature.class)).isFrozen()) {
+        if (((Temperature)this._propertyContainer.getProperty(Temperature.class)).isFrozen()) {
             return new HashSet<>();
         }
-        directions.removeAll(this.usedFlowDirections);
+        directions.removeAll(this._usedFlowDirections);
         return directions;
     }
 
     public Water runWaterOnDirection(Direction direction) {
-        if (usedFlowDirections.contains(direction)) {
+        if (_usedFlowDirections.contains(direction)) {
             return null;
         }
         Water water = this.clone();
-        water.usedFlowDirections.clear();
-        water.usedFlowDirections.add(direction.opposite());
+        water._usedFlowDirections.clear();
+        water._usedFlowDirections.add(direction.opposite());
         return water;
     }
 
     public Water mix(Water otherWater) {
         Water newWaterWithFlowDirections = this.mixFlowDirections(otherWater);
-        PropertyContainer newPropertyContainer = this.propertyContainer.mixProperties(otherWater.propertyContainer);
+        PropertyContainer newPropertyContainer = this._propertyContainer.mixProperties(otherWater._propertyContainer);
 
         Water newWater = new Water();
-        newWater.usedFlowDirections.addAll(newWaterWithFlowDirections.usedFlowDirections);
+        newWater._usedFlowDirections.addAll(newWaterWithFlowDirections._usedFlowDirections);
         newWater.setPropertyContainer(newPropertyContainer);
         return newWater;
     }
 
     private Water mixFlowDirections(Water otherWater) {
         Water newWater = new Water();
-        newWater.usedFlowDirections.addAll(this.usedFlowDirections);
-        newWater.usedFlowDirections.addAll(otherWater.usedFlowDirections);
+        newWater._usedFlowDirections.addAll(this._usedFlowDirections);
+        newWater._usedFlowDirections.addAll(otherWater._usedFlowDirections);
         return newWater;
     }
 
@@ -64,14 +64,13 @@ public class Water {
         if (!(object instanceof Water)) {
             return false;
         }
-
-        return this.propertyContainer.equals(((Water) object).propertyContainer);
+        return this._propertyContainer.equals(((Water) object)._propertyContainer);
     }
 
     public Water clone() {
         Water water = new Water();
-        water.usedFlowDirections.addAll(this.usedFlowDirections);
-        water.setPropertyContainer(this.propertyContainer);
+        water._usedFlowDirections.addAll(this._usedFlowDirections);
+        water.setPropertyContainer(this._propertyContainer);
         return water;
     }
 }

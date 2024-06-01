@@ -8,6 +8,6 @@ import java.util.List;
 
 public class Tee extends Pipe {
     public Tee() {
-            this.drainages = new HashSet<>(List.of(Direction.west(), Direction.east(), Direction.north()));
+            this._drainages = new HashSet<>(List.of(Direction.west(), Direction.east(), Direction.north()));
         }
 }

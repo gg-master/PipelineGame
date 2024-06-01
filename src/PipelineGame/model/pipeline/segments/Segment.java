@@ -10,20 +10,18 @@ import PipelineGame.model.utils.Direction;
 import java.util.*;
 
 public abstract class Segment implements WaterFlowContext {
+    protected HashSet<Direction> _drainages;
 
-    protected HashSet<Direction> drainages;
-    protected List<WaterDevice> devices = new ArrayList<>();
-
-    protected Water water;
-
-    protected Cell cell;
+    private Cell cell;
+    private Water _water;
+    private final List<WaterDevice> _devices = new ArrayList<>();
 
     public void addDevice(WaterDevice device) {
-        this.devices.add(device);
+        this._devices.add(device);
     }
 
     public ArrayList<WaterDevice> getDevices() {
-        return new ArrayList<>(this.devices);
+        return new ArrayList<>(this._devices);
     }
 
     public void setCell(Cell cell) {
@@ -59,7 +57,7 @@ public abstract class Segment implements WaterFlowContext {
     }
 
     public HashSet<Direction> getAvailableDirections() {
-        return new HashSet<>(this.drainages);
+        return new HashSet<>(this._drainages);
     }
 
     public WaterFlowContext getNextContext(Direction direction) {
@@ -67,29 +65,29 @@ public abstract class Segment implements WaterFlowContext {
     }
 
     public Water conductWater(Water water) {
-        if (this.water != null) {
-            this.water = this.water.mix(water);
+        if (this._water != null) {
+            this._water = this._water.mix(water);
         } else {
-            this.water = water.clone();
+            this._water = water.clone();
         }
-        for (WaterDevice device : this.devices) {
-            this.water = device.conductWater(this.water);
+        for (WaterDevice device : this._devices) {
+            this._water = device.conductWater(this._water);
         }
         this.fireConductWater();
-        return this.water.clone();
+        return this._water.clone();
     }
 
     public Water getWater() {
-        return this.water.clone();
+        return this._water.clone();
     }
 
     public void rotateRight() {
         HashSet<Direction> newDrainages = new HashSet<>();
 
-        for (Direction direction : this.drainages) {
+        for (Direction direction : this._drainages) {
            newDrainages.add(direction.clockwise());
         }
-        this.drainages = newDrainages;
+        this._drainages = newDrainages;
         this.fireSegmentRotate();
     }
 

@@ -8,6 +8,6 @@ import java.util.List;
 
 public class Adapter extends Pipe {
     public Adapter() {
-        this.drainages = new HashSet<>(List.of(Direction.west(), Direction.east()));
+        this._drainages = new HashSet<>(List.of(Direction.west(), Direction.east()));
     }
 }

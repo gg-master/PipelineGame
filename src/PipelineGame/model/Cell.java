@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class Cell {
-    private final HashMap<Direction, Cell> neighbors = new HashMap<>() {{
+    private final HashMap<Direction, Cell> _neighbors = new HashMap<>() {{
         put(Direction.west(), null);
         put(Direction.east(), null);
         put(Direction.north(), null);
@@ -17,15 +17,15 @@ public class Cell {
     private Segment segment;
 
     public Cell getNeighbor(Direction direction) {
-        return neighbors.get(direction);
+        return this._neighbors.getOrDefault(direction, null);
     }
 
     public void setNeighbor(Direction direction, Cell neighbour) {
-        Cell currentNeighbour = this.neighbors.get(direction);
+        Cell currentNeighbour = this._neighbors.getOrDefault(direction, null);
         if (currentNeighbour == neighbour) {
             return;
         }
-        this.neighbors.put(direction, neighbour);
+        this._neighbors.put(direction, neighbour);
 
         if (currentNeighbour != null && currentNeighbour.getNeighbor(direction.opposite()) == this) {
             currentNeighbour.setNeighbor(direction.opposite(), null);
@@ -37,7 +37,7 @@ public class Cell {
     }
 
     public Segment getSegment() {
-        return segment;
+        return this.segment;
     }
 
     public void setSegment(Segment segment) {
@@ -59,7 +59,7 @@ public class Cell {
     public HashSet<Direction> getDirectionsOfFreeNeighbors() {
         HashSet<Direction> freeDirections = new HashSet<>();
 
-        for (Direction direction : this.neighbors.keySet()) {
+        for (Direction direction : this._neighbors.keySet()) {
             Cell neighbor = this.getNeighbor(direction);
             if (neighbor != null && neighbor.getSegment() == null) {
                 freeDirections.add(direction);

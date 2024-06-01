@@ -7,6 +7,6 @@ import java.util.List;
 
 public class Tap extends Segment {
     public Tap() {
-        this.drainages = new HashSet<>(List.of(Direction.east()));
+        this._drainages = new HashSet<>(List.of(Direction.east()));
     }
 }

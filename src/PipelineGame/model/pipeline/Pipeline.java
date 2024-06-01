@@ -12,8 +12,8 @@ import static PipelineGame.AppSettings.waterFlowAnimationDurationInMillis;
 
 
 public class Pipeline {
-    private HashMap<Integer, HashSet<WaterFlowContext>> pipelineBuildHistory;
-    private HashMap<WaterFlowContext, HashSet<Direction>> pourWaterContexts;
+    private HashMap<Integer, HashSet<WaterFlowContext>> _pipelineBuildHistory;
+    private HashMap<WaterFlowContext, HashSet<Direction>> _pourWaterContexts;
     private final Tap tap;
     private Hatch hatch;
     private int ticCounter = 0;
@@ -23,15 +23,15 @@ public class Pipeline {
     }
 
     public void buildPipeline(Water initWater) {
-        ticCounter = 0;
-        pipelineBuildHistory = new HashMap<>();
-        pourWaterContexts = new HashMap<>();
+        this.ticCounter = 0;
+        this._pipelineBuildHistory = new HashMap<>();
+        this._pourWaterContexts = new HashMap<>();
 
         Queue<WaterFlow> activeWaterFlows = new ArrayDeque<>();
         activeWaterFlows.add(new WaterFlow(initWater, this.tap));
 
         while (activeWaterFlows.size() != 0) {
-            ticCounter++;
+            this.ticCounter++;
             List<WaterFlow> newFlows = runAllWaterFlows(activeWaterFlows);
             activeWaterFlows.addAll(newFlows);
 
@@ -49,7 +49,7 @@ public class Pipeline {
         while (flows.peek() != null) {
             runWaterFlow(flows.poll(), visitedSegments);
         }
-        this.pipelineBuildHistory.put(this.ticCounter, new HashSet<>(visitedSegments.keySet()));
+        this._pipelineBuildHistory.put(this.ticCounter, new HashSet<>(visitedSegments.keySet()));
 
         List<WaterFlow> newFlows = new ArrayList<>();
         for (ArrayList<WaterFlow> nextFlows : visitedSegments.values()) {
@@ -83,7 +83,7 @@ public class Pipeline {
         if (this.hatch != null) {
             return true;
         }
-        for (HashSet<WaterFlowContext> ctxHashSet : this.pipelineBuildHistory.values()) {
+        for (HashSet<WaterFlowContext> ctxHashSet : this._pipelineBuildHistory.values()) {
             for (WaterFlowContext context : ctxHashSet) {
                 if (context instanceof Hatch) {
                     this.hatch = (Hatch) context;
@@ -95,11 +95,11 @@ public class Pipeline {
     }
 
     public HashMap<WaterFlowContext, HashSet<Direction>> getPourWaterContexts() {
-        return new HashMap<>(this.pourWaterContexts);
+        return new HashMap<>(this._pourWaterContexts);
     }
 
     public HashMap<Integer, HashSet<WaterFlowContext>> getPipelineBuildHistory() {
-        return new HashMap<>(this.pipelineBuildHistory);
+        return new HashMap<>(this._pipelineBuildHistory);
     }
 
     // ---------------------------------- Управление событиями пайплайна -----------------------------------------------
@@ -114,10 +114,10 @@ public class Pipeline {
     }
 
     protected void firePourWater(WaterFlowContext context, Direction direction) {
-        if (!this.pourWaterContexts.containsKey(context)) {
-            this.pourWaterContexts.put(context, new HashSet<>());
+        if (!this._pourWaterContexts.containsKey(context)) {
+            this._pourWaterContexts.put(context, new HashSet<>());
         }
-        this.pourWaterContexts.get(context).add(direction);
+        this._pourWaterContexts.get(context).add(direction);
 
         for (IPipelineListener listener : pipelineListeners) {
             listener.onPourWater(context, direction);

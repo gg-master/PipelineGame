@@ -8,6 +8,6 @@ import java.util.List;
 
 public class Corner extends Pipe {
     public Corner() {
-        this.drainages = new HashSet<>(List.of(Direction.west(), Direction.north()));
+        this._drainages = new HashSet<>(List.of(Direction.west(), Direction.north()));
     }
 }

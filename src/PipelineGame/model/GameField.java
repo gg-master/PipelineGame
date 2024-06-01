@@ -9,7 +9,7 @@ import java.util.List;
 
 public class GameField {
     private final Dimension dimension;
-    protected List<Cell> cells;
+    private List<Cell> _cells;
 
     public GameField(Dimension dimension) {
         if (dimension.width < 2 || dimension.height < 2) {
@@ -21,14 +21,14 @@ public class GameField {
     }
 
     public void recreateGameField() {
-        this.cells = new ArrayList<>(this.dimension.width * this.dimension.height);
+        this._cells = new ArrayList<>(this.dimension.width * this.dimension.height);
 
         for (int row = 0; row < this.dimension.height; row++) {
             for (int col = 0; col < this.dimension.width; col++) {
                 Cell cell = new Cell();
                 cell.setNeighbor(Direction.west(), getCell(row, col - 1));
                 cell.setNeighbor(Direction.north(), getCell(row - 1, col));
-                cells.add(cell);
+                _cells.add(cell);
             }
         }
     }
@@ -38,7 +38,7 @@ public class GameField {
                 (col < 0 || col >= this.dimension.width)) {
             return null;
         }
-        return this.cells.get(this.dimension.width * row + col);
+        return this._cells.get(this.dimension.width * row + col);
     }
 
     public Cell getCell(Point point) {
