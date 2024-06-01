@@ -49,7 +49,7 @@ public class WaterFactory {
 
         PropertyContainer propertyContainer = newWater.getPropertyContainer();
         propertyContainer.addProperty(new Salt(random.nextDouble(1000)));
-        propertyContainer.addProperty(new Temperature(random.nextDouble(200) - 60));
+        propertyContainer.addProperty(new Temperature(random.nextDouble(140) - 40));
         newWater.setPropertyContainer(propertyContainer);
         return newWater;
     }
