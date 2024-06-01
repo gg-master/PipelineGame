@@ -3,10 +3,9 @@ package PipelineGame.model.pipeline.water.properties;
 import PipelineGame.model.pipeline.water.WaterProperty;
 
 public class Salt extends WaterProperty {
-    private final double psu;
+    private double psu = 0;
 
     public Salt() {
-        this(0);
     }
 
     public Salt(double psu) {

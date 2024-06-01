@@ -3,10 +3,9 @@ package PipelineGame.model.pipeline.water.properties;
 import PipelineGame.model.pipeline.water.WaterProperty;
 
 public class Temperature extends WaterProperty {
-    private final double degrees;
+    private double degrees = 15;
 
     public Temperature() {
-        this(15);
     }
 
     public Temperature(double degrees) {
