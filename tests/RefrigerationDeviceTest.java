@@ -1,4 +1,3 @@
-import PipelineGame.model.pipeline.devices.HeatingDevice;
 import PipelineGame.model.pipeline.devices.RefrigerationDevice;
 import PipelineGame.model.pipeline.water.Water;
 import PipelineGame.model.pipeline.water.WaterFactory;

@@ -2,20 +2,18 @@ import PipelineGame.model.Cell;
 import PipelineGame.model.pipeline.devices.HeatingDevice;
 import PipelineGame.model.pipeline.devices.SaltFilteringDevice;
 import PipelineGame.model.pipeline.devices.WaterDevice;
-import PipelineGame.model.pipeline.water.PropertyContainer;
-import PipelineGame.model.pipeline.water.Water;
 import PipelineGame.model.pipeline.segments.Hatch;
 import PipelineGame.model.pipeline.segments.Tap;
 import PipelineGame.model.pipeline.segments.pipes.Adapter;
 import PipelineGame.model.pipeline.segments.pipes.Corner;
 import PipelineGame.model.pipeline.segments.pipes.Cross;
 import PipelineGame.model.pipeline.segments.pipes.Tee;
-import PipelineGame.model.pipeline.water.WaterFactory;
+import PipelineGame.model.pipeline.water.PropertyContainer;
+import PipelineGame.model.pipeline.water.Water;
 import PipelineGame.model.pipeline.water.properties.Salt;
 import PipelineGame.model.pipeline.water.properties.Temperature;
 import PipelineGame.model.utils.Direction;
 import org.junit.jupiter.api.Test;
-
 
 import java.util.HashSet;
 import java.util.List;

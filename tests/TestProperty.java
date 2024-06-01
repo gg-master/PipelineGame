@@ -1,5 +1,4 @@
 import PipelineGame.model.pipeline.water.PropertyContainer;
-import PipelineGame.model.pipeline.water.Water;
 import PipelineGame.model.pipeline.water.WaterProperty;
 import PipelineGame.model.pipeline.water.properties.Salt;
 import PipelineGame.model.pipeline.water.properties.Temperature;

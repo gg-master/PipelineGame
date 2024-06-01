@@ -1,9 +1,7 @@
-import PipelineGame.model.pipeline.devices.HeatingDevice;
 import PipelineGame.model.pipeline.devices.SaltFilteringDevice;
 import PipelineGame.model.pipeline.water.Water;
 import PipelineGame.model.pipeline.water.WaterFactory;
 import PipelineGame.model.pipeline.water.properties.Salt;
-import PipelineGame.model.pipeline.water.properties.Temperature;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
