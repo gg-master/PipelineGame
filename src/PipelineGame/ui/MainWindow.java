@@ -31,7 +31,7 @@ public class MainWindow extends JFrame {
         put("Start 4x4 game", new Dimension(4, 4));
         put("Start 5x5 game", new Dimension(5, 5));
         put("Start 15x8 game", new Dimension(15, 8));
-//        put("Super BIG", new Dimension(30, 13));
+        put("Super BIG (30x13) game", new Dimension(30, 13));
     }};
 
     public MainWindow(){
@@ -128,8 +128,8 @@ public class MainWindow extends JFrame {
         this.gameObjectiveLabel.setText("Ожидаемая вода: Teмпература: > " +
                 String.format("%.2f", temp.getDegrees()) + " Соли: < " + String.format("%.2f", salt.getPSU()));
 
-        Temperature startTemp = (Temperature) game.getStartWater().getPropertyContainer().getProperty(Temperature.class);
-        Salt startSalt = (Salt) game.getStartWater().getPropertyContainer().getProperty(Salt.class);
+        Temperature startTemp = (Temperature) game.getInitWater().getPropertyContainer().getProperty(Temperature.class);
+        Salt startSalt = (Salt) game.getInitWater().getPropertyContainer().getProperty(Salt.class);
         this.gameStartWaterLabel.setText("Стартовая вода: " + startTemp.toString() + " " + startSalt.toString());
 
         this.game.startGame();

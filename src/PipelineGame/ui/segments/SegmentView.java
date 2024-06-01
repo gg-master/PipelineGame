@@ -12,16 +12,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static PipelineGame.AppSettings.DEFAULT_SEGMENT_SIDE_SIZE;
 import static PipelineGame.ui.DevicesView.drawDevicesIcons;
 import static PipelineGame.ui.ImageHelper.getScaledIcon;
 
 public abstract class SegmentView extends JButton {
-    public static final int SIDE_SIZE = 80;
+    public static int SIDE_SIZE = DEFAULT_SEGMENT_SIDE_SIZE;
     public Segment segment;
 
     public ImageIcon rawSegmentIcon;
 
-    private Timer blinkTimer;
     private boolean isBlinking;
 
     public SegmentView(Segment segment) {
@@ -98,7 +98,7 @@ public abstract class SegmentView extends JButton {
         }
         isBlinking = true;
 
-        blinkTimer = new Timer(333, new ActionListener() {
+        new Timer(333, new ActionListener() {
             private boolean toggle = false;
 
             @Override
@@ -110,8 +110,7 @@ public abstract class SegmentView extends JButton {
                 }
                 toggle = !toggle;
             }
-        });
-        blinkTimer.start();
+        }).start();
     }
 
     // ---------------------------------- Слушатель модели сегмента ---------------------------------------------------

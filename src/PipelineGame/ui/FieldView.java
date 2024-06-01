@@ -19,6 +19,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import static PipelineGame.AppSettings.*;
+
 
 public class FieldView extends JPanel {
     public final PipelineListener pipelineListener = new PipelineListener();
@@ -44,6 +46,8 @@ public class FieldView extends JPanel {
     }
 
     private void createField() {
+        SegmentView.SIDE_SIZE = getOptimalSegmentSideSize();
+
         int CELL_SIZE = SegmentView.SIDE_SIZE;
         Dimension fieldDimension = new Dimension(CELL_SIZE * this.dimension.width,
                 CELL_SIZE * this.dimension.height);
@@ -53,6 +57,15 @@ public class FieldView extends JPanel {
         setMaximumSize(fieldDimension);
 
         this.repaintField();
+    }
+
+    private int getOptimalSegmentSideSize() {
+        if (this.dimension.width > 15 || this.dimension.height > 8) {
+            return SMALL_SEGMENT_SIDE_SIZE;
+        } else if (this.dimension.width <= 3 && this.dimension.height <= 3) {
+            return BIG_SEGMENT_SIDE_SIZE;
+        }
+        return DEFAULT_SEGMENT_SIDE_SIZE;
     }
 
     private void repaintField() {
