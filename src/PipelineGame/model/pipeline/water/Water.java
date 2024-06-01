@@ -9,6 +9,13 @@ public class Water {
     private final HashSet<Direction> usedFlowDirections = new HashSet<>();
     private PropertyContainer propertyContainer = new PropertyContainer();
 
+    public Water() {
+    }
+
+    public Water(PropertyContainer propertyContainer) {
+        this.setPropertyContainer(propertyContainer);
+    }
+
     public void setPropertyContainer(PropertyContainer propertyContainer) {
         this.propertyContainer = propertyContainer.clone();
     }
