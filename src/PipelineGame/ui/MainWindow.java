@@ -23,7 +23,7 @@ public class MainWindow extends JFrame {
 
     private final JLabel gameStartWaterLabel;
     private final JLabel gameObjectiveLabel;
-    private FieldView fieldView = new FieldView(new GameField(new Dimension(3, 2)));
+    private FieldView fieldView = new FieldView(new GameField(new Dimension(2, 2)));
 
     private final LinkedHashMap<String, Dimension> menuItemsOfGameModes = new LinkedHashMap<>() {{
         put("Start 2x2 game", new Dimension(2, 2));
