@@ -37,7 +37,7 @@ class SaltTest {
     }
 
     @Test
-    void creatingTemperatureWithValueBeyondLimits() {
+    void creatingSaltWithValueBeyondLimits() {
         Salt salt = new Salt(-50);
         assertEquals(0, salt.getPSU());
 

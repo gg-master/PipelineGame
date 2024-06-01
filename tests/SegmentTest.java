@@ -1,4 +1,5 @@
 import PipelineGame.model.Cell;
+import PipelineGame.model.events.IPipelineSegmentListener;
 import PipelineGame.model.pipeline.devices.HeatingDevice;
 import PipelineGame.model.pipeline.devices.SaltFilteringDevice;
 import PipelineGame.model.pipeline.devices.WaterDevice;
@@ -21,14 +22,28 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SegmentTest {
+    private class PipelineSegmentListener implements IPipelineSegmentListener {
+        public boolean isOnConductWaterCalled = false;
+        public boolean isOnSegmentRotateCalled = false;
+
+        @Override
+        public void onConductWater() {
+            isOnConductWaterCalled = true;
+        }
+
+        @Override
+        public void onSegmentRotate() {
+            isOnSegmentRotateCalled = true;
+        }
+    }
 
     @Test
     void setCell_sampleTest() {
         Cell cell_first = new Cell();
-
         Tap tap = new Tap();
 
         tap.setCell(cell_first);
+
         assertEquals(cell_first, tap.getCell());
         assertEquals(cell_first.getSegment(), tap);
     }
@@ -39,8 +54,8 @@ class SegmentTest {
         Cell cell_second = new Cell();
 
         Tap tap = new Tap();
-
         tap.setCell(null);
+
         assertNull(tap.getCell());
         assertNull(cell_first.getSegment());
 
@@ -114,6 +129,7 @@ class SegmentTest {
         HashSet<Direction> cornerDirections = corner.getAvailableDirections();
         assertEquals(expCornerDirections, cornerDirections);
     }
+
     @Test
     void getAvailableDirections_teeDirections() {
         Tee tee = new Tee();
@@ -156,7 +172,7 @@ class SegmentTest {
     }
 
     @Test
-    void conductWater_sampleMixTest() {
+    void conductWater_mixingTest() {
         Water initWater = new Water();
         Adapter adapter = new Adapter();
         adapter.conductWater(initWater);
@@ -206,6 +222,14 @@ class SegmentTest {
     @Test
     void rotateRight_sampleTest() {
         Tap tap = new Tap();
+
+        PipelineSegmentListener listener = new PipelineSegmentListener();
+        tap.addPipelineSegmentListener(listener);
+
+        PipelineSegmentListener disconnectedListener = new PipelineSegmentListener();
+        tap.addPipelineSegmentListener(disconnectedListener);
+        tap.removePipelineSegmentListener(disconnectedListener);
+
         HashSet<Direction> expDirections = new HashSet<>() {{
             add(Direction.south());
         }};
@@ -213,6 +237,8 @@ class SegmentTest {
         tap.rotateRight();
 
         assertEquals(expDirections, tap.getAvailableDirections());
+        assertTrue(listener.isOnSegmentRotateCalled);
+        assertFalse(disconnectedListener.isOnSegmentRotateCalled);
     }
 
     @Test

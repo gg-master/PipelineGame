@@ -1,4 +1,5 @@
 import PipelineGame.model.GameField;
+import PipelineGame.model.events.IPipelineListener;
 import PipelineGame.model.pipeline.Pipeline;
 import PipelineGame.model.pipeline.water.Water;
 import PipelineGame.model.pipeline.WaterFlowContext;
@@ -17,6 +18,22 @@ import java.util.HashSet;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PipelineTest {
+    private class PipelineListener implements IPipelineListener {
+        private WaterFlowContext expContext;
+        public boolean isCalled = false;
+
+        public PipelineListener() {}
+
+        public PipelineListener(WaterFlowContext context) {
+            this.expContext = context;
+        }
+
+        @Override
+        public void onPourWater(WaterFlowContext context, Direction direction) {
+            isCalled = true;
+            assertEquals(expContext, context);
+        }
+    }
 
     @Test
     void buildPipeline_sampleTest() {
@@ -37,6 +54,9 @@ class PipelineTest {
         segment.rotateRight();
 
         Pipeline pipeline = new Pipeline((Tap) field.getCell(0, 0).getSegment());
+        PipelineListener listener = new PipelineListener();
+        pipeline.addPipeLineListener(listener);
+
         pipeline.buildPipeline(new Water());
 
         HashMap<Integer, HashSet<WaterFlowContext>> expHistory = new HashMap<>() {{
@@ -48,6 +68,7 @@ class PipelineTest {
         assertEquals(expHistory, pipeline.getPipelineBuildHistory());
         assertEquals(0, pipeline.getPourWaterContexts().size());
         assertTrue(pipeline.isHatchReached());
+        assertFalse(listener.isCalled);
     }
 
     @Test
@@ -57,6 +78,9 @@ class PipelineTest {
         field.getCell(1, 1).setSegment(new Hatch());
 
         Pipeline pipeline = new Pipeline((Tap) field.getCell(0, 0).getSegment());
+        PipelineListener listener = new PipelineListener(field.getCell(0, 0).getSegment());
+        pipeline.addPipeLineListener(listener);
+
         pipeline.buildPipeline(new Water());
 
         HashMap<Integer, HashSet<WaterFlowContext>> expHistory = new HashMap<>() {{
@@ -70,6 +94,7 @@ class PipelineTest {
         assertEquals(1, pipeline.getPourWaterContexts().size());
         assertEquals(expPourWaterContext, pipeline.getPourWaterContexts());
         assertFalse(pipeline.isHatchReached());
+        assertTrue(listener.isCalled);
     }
 
     @Test
@@ -79,12 +104,16 @@ class PipelineTest {
         field.getCell(0,1).setSegment(new Tee());
 
         Pipeline pipeline = new Pipeline((Tap) field.getCell(0, 0).getSegment());
+
+        PipelineListener listener = new PipelineListener(field.getCell(0, 0).getSegment());
+        pipeline.addPipeLineListener(listener);
+        pipeline.removePipelineListener(listener);
+
         pipeline.buildPipeline(new Water());
 
         HashMap<Integer, HashSet<WaterFlowContext>> expHistory = new HashMap<>() {{
             put(1, new HashSet<>() {{ add(field.getCell(0, 0).getSegment()); }});
             put(2, new HashSet<>() {{ add(field.getCell(0, 1).getSegment()); }});
-
         }};
 
         HashMap<WaterFlowContext, HashSet<Direction>> expPourWaterContext = new HashMap<>() {{
@@ -96,6 +125,7 @@ class PipelineTest {
         assertEquals(expHistory, pipeline.getPipelineBuildHistory());
         assertEquals(1, pipeline.getPourWaterContexts().size());
         assertEquals(expPourWaterContext, pipeline.getPourWaterContexts());
+        assertFalse(listener.isCalled);
     }
 
     @Test
