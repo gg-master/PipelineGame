@@ -70,17 +70,17 @@ public abstract class Segment implements WaterFlowContext {
         if (this.water != null) {
             this.water = this.water.mix(water);
         } else {
-            this.water = water;
+            this.water = water.clone();
         }
         for (WaterDevice device : this.devices) {
             this.water = device.conductWater(this.water);
         }
         this.fireConductWater();
-        return this.water;
+        return this.water.clone();
     }
 
     public Water getWater() {
-        return this.water;
+        return this.water.clone();
     }
 
     public void rotateRight() {
