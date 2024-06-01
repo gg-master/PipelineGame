@@ -39,9 +39,12 @@ public class SegmentFactory {
             throw new RuntimeException("Unknown PipeType");
         }
 
-        int countDevices = new Random().nextInt(3) - 2;
-        for (int i = 0; i <= countDevices; i++) {
-            pipe.addDevice(this.getRandomWaterDevice());
+        Random random = new Random();
+        if (random.nextInt(100) > 30) {
+            int countDevices = random.nextInt(3);
+            for (int i = 0; i < countDevices; i++) {
+                pipe.addDevice(this.getRandomWaterDevice());
+            }
         }
         return pipe;
     }
@@ -50,9 +53,9 @@ public class SegmentFactory {
         Random random = new Random();
         int chance = random.nextInt(100);
 
-        if (chance > 40 && chance < 80) {
+        if (chance > 40 && chance < 65) {
             return new RefrigerationDevice();
-        } else if (chance > 80 && chance < 99) {
+        } else if (chance > 65 && chance < 99) {
             return new SaltFilteringDevice();
         }
         return new HeatingDevice();
