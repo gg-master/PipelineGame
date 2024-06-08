@@ -100,7 +100,12 @@ public class MainWindow extends JFrame {
         aboutItem.addActionListener(e -> {
             String text = "<html><h2>PipelineGame</h2><h4>Игра \"Водопроводчик\"</h4>" +
                     "Курсовой проект по дисциплине Объектно-ориентированный анализ и программирование<br>" +
-                    "Автор: Коршунов Анатолий<br>Дата сборки: 31.05.2024<br></html>";
+                    "Автор: Коршунов Анатолий<br>Дата сборки: 31.05.2024<br><br>" +
+                    "GitHub: https://github.com/gg-master/PipelineGame <br><br>" +
+                    "<small>Использованные изображения: <br>" +
+                    "Heating-device: Thermometer icons created by Freepik - Flaticon<br>" +
+                    "Refrigeration-device: Cold exposure icons created by Freepik - Flaticon<br>" +
+                    "Filtering-device: Filter icons created by hqrloveq - Flaticon</small></html>";
             JOptionPane.showMessageDialog(MainWindow.this, text,
                     "Об игре", JOptionPane.PLAIN_MESSAGE);
         });
