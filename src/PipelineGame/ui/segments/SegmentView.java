@@ -4,7 +4,7 @@ import PipelineGame.model.events.IPipelineSegmentListener;
 import PipelineGame.model.pipeline.devices.WaterDevice;
 import PipelineGame.model.pipeline.segments.Segment;
 import PipelineGame.model.pipeline.water.WaterProperty;
-import PipelineGame.ui.ImageHelper;
+import PipelineGame.ui.utils.ImageHelper;
 import PipelineGame.ui.WaterView;
 
 import javax.swing.*;
@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 
 import static PipelineGame.AppSettings.DEFAULT_SEGMENT_SIDE_SIZE;
 import static PipelineGame.ui.DevicesView.drawDevicesIcons;
-import static PipelineGame.ui.ImageHelper.getScaledIcon;
+import static PipelineGame.ui.utils.ImageHelper.getScaledIcon;
 
 public abstract class SegmentView extends JButton {
     public static int SIDE_SIZE = DEFAULT_SEGMENT_SIDE_SIZE;

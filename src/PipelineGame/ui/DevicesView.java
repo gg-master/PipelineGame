@@ -1,6 +1,5 @@
 package PipelineGame.ui;
 
-import PipelineGame.AppSettings;
 import PipelineGame.model.pipeline.devices.HeatingDevice;
 import PipelineGame.model.pipeline.devices.RefrigerationDevice;
 import PipelineGame.model.pipeline.devices.SaltFilteringDevice;
@@ -12,15 +11,15 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static PipelineGame.AppSettings.DEFAULT_SEGMENT_SIDE_SIZE;
-import static PipelineGame.ui.ImageHelper.getScaledIcon;
-import static PipelineGame.ui.ImageHelper.overlayImages;
+import static PipelineGame.ui.utils.ImageHelper.getScaledIcon;
+import static PipelineGame.ui.utils.ImageHelper.overlayImages;
+import static PipelineGame.ui.utils.ImageLoader.loadAsImageIcon;
 
 public class DevicesView {
     private static final HashMap<Class<? extends WaterDevice>, ImageIcon> devicesIcons = new HashMap<>() {{
-        put(HeatingDevice.class, new ImageIcon(AppSettings.pathToImages + "heating-device.png"));
-        put(RefrigerationDevice.class, new ImageIcon(AppSettings.pathToImages + "refrigeration-device.png"));
-        put(SaltFilteringDevice.class, new ImageIcon(AppSettings.pathToImages + "filtering-device.png"));
+        put(HeatingDevice.class, loadAsImageIcon("heating-device.png"));
+        put(RefrigerationDevice.class, loadAsImageIcon("refrigeration-device.png"));
+        put(SaltFilteringDevice.class, loadAsImageIcon("filtering-device.png"));
     }};
 
     public static ImageIcon drawDevicesIcons(ImageIcon segmentIcon, ArrayList<WaterDevice> devices) {

@@ -1,12 +1,13 @@
 package PipelineGame.ui.segments;
 
-import PipelineGame.AppSettings;
 import PipelineGame.model.pipeline.segments.pipes.Cross;
 
 import javax.swing.*;
 
+import static PipelineGame.ui.utils.ImageLoader.loadAsImageIcon;
+
 public class CrossView extends SegmentView{
-    private static final ImageIcon icon = new ImageIcon(AppSettings.pathToImages + "cross.png");
+    private static final ImageIcon icon = loadAsImageIcon("cross.png");
 
     public CrossView(Cross cross) {
         super(cross);

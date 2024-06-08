@@ -1,4 +1,4 @@
-package PipelineGame.ui;
+package PipelineGame.ui.utils;
 
 import javax.swing.*;
 import java.awt.*;

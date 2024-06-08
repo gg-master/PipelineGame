@@ -1,15 +1,16 @@
 package PipelineGame.ui.segments;
 
-import PipelineGame.AppSettings;
 import PipelineGame.model.pipeline.segments.Tap;
 import PipelineGame.model.utils.Direction;
-import PipelineGame.ui.ImageHelper;
+import PipelineGame.ui.utils.ImageHelper;
 
 import javax.swing.*;
 import java.util.HashMap;
 
+import static PipelineGame.ui.utils.ImageLoader.loadAsImageIcon;
+
 public class TapView extends SegmentView {
-    private static final ImageIcon icon = new ImageIcon(AppSettings.pathToImages + "tap.png");
+    private static final ImageIcon icon = loadAsImageIcon("tap.png");
 
     private static final HashMap<Direction, ImageIcon> icons = new HashMap<>(){{
         put(Direction.east(), icon);

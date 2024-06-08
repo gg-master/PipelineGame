@@ -1,16 +1,17 @@
 package PipelineGame.ui.segments;
 
-import PipelineGame.AppSettings;
 import PipelineGame.model.pipeline.segments.pipes.Corner;
 import PipelineGame.model.utils.Direction;
-import PipelineGame.ui.ImageHelper;
+import PipelineGame.ui.utils.ImageHelper;
 
 import javax.swing.*;
 import java.util.HashMap;
 import java.util.Set;
 
+import static PipelineGame.ui.utils.ImageLoader.loadAsImageIcon;
+
 public class CornerView extends SegmentView{
-    private static final ImageIcon icon = new ImageIcon(AppSettings.pathToImages + "corner.png");
+    private static final ImageIcon icon = loadAsImageIcon("corner.png");
 
     private static final HashMap<Set<Direction>, ImageIcon> icons = new HashMap<>(){{
         put(Set.of(Direction.west(), Direction.north()), icon);
