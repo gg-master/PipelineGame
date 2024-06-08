@@ -2,13 +2,13 @@ package PipelineGame.ui.segments;
 
 import PipelineGame.model.events.IPipelineSegmentListener;
 import PipelineGame.model.pipeline.segments.Segment;
-import PipelineGame.ui.ImageHelper;
+import PipelineGame.ui.utils.ImageHelper;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-import static PipelineGame.ui.ImageHelper.getScaledIcon;
+import static PipelineGame.ui.utils.ImageHelper.getScaledIcon;
 
 public abstract class SegmentView extends JButton {
     public static final int SIDE_SIZE = 80;
