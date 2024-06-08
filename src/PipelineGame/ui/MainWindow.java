@@ -80,7 +80,8 @@ public class MainWindow extends JFrame {
         aboutItem.addActionListener(e -> {
             String text = "<html><h2>PipelineGame</h2><h4>Игра \"Водопроводчик\"</h4>" +
                     "Курсовой проект по дисциплине Объектно-ориентированный анализ и программирование<br>" +
-                    "Автор: Коршунов Анатолий<br>Дата сборки: 10.05.2024<br></html>";
+                    "Автор: Коршунов Анатолий<br>Дата сборки: 10.05.2024<br><br>" +
+                    "GitHub: https://github.com/gg-master/PipelineGame</html>";
             JOptionPane.showMessageDialog(MainWindow.this, text,
                     "Об игре", JOptionPane.PLAIN_MESSAGE);
         });
